@@ -2,6 +2,7 @@
 #include "Colour.h"
 #include "Sphere.h"
 #include "Light.h"
+#include "Scene.h"
 #include <vector>
 #include <fstream>
 #include <cmath>
@@ -55,7 +56,6 @@ bool sceneIntersection(const Vec3& origin, const Vec3& direction, const std::vec
   return sphere_distance < 1000.0f;
 }
 
-
 // Return the direction that a ray is reflected based on its initial direction and the surface_normal of the sphere it intersects with
 Vec3 reflect(const Vec3& direction, const Vec3& surface_normal) {
   return direction - surface_normal * (direction * surface_normal) * 2.0f;
@@ -103,7 +103,7 @@ Colour castRay(const Vec3& origin, const Vec3& direction, const std::vector<Sphe
 }
 
 // Cast a ray from the camera in the direction of each pixel to get the colour of each pixel and output the rendered image
-void render(const std::vector<Sphere>& spheres, const std::vector<Light>& lights) {
+void render(const Scene& scene) {
   // Dimensions of output image
   const int width = 800;
   const int height = 600;
@@ -120,13 +120,13 @@ void render(const std::vector<Sphere>& spheres, const std::vector<Light>& lights
       float y = - (2 * (i + 0.5) / height - 1) * tan(fov / 2);
       // Direction to cast ray
       Vec3 direction = Vec3(x, y, 1).normalize();
-      framebuffer[j + i * width] = castRay(Vec3(0, 0, 0), direction, spheres, lights);
+      framebuffer[j + i * width] = castRay(scene.getCamera(), direction, scene.getSpheres(), scene.getLights());
     }
   }
 
   // Save framebuffer to file
   std::ofstream out_image;
-  out_image.open("./out_image.ppm");
+  out_image.open("../out_image.ppm");
   out_image << "P3\n" << width << " " << height << "\n255\n";
   for (size_t i = 0; i < height * width; i++) {
     int r = static_cast<int>(255 * framebuffer[i].getR());
@@ -138,17 +138,18 @@ void render(const std::vector<Sphere>& spheres, const std::vector<Light>& lights
 }
 
 int main() {
-  std::vector<Sphere> spheres;
-  spheres.push_back(Sphere(Vec3(-2.5, -2, 12), 2, Colour(0.4, 0.4, 0.4), 0.6, 0.3, 50, 0.1));
-  spheres.push_back(Sphere(Vec3(2.5, -2, 19), 4, Colour(0.0, 0.0, 0.25), 0.9, 0.1, 10, 0.0));
-  spheres.push_back(Sphere(Vec3(-1, 3, 22), 4, Colour(1.0, 1.0, 1.0), 0.0, 1.0, 1000, 0.9));
+  Scene scene;
 
-  std::vector<Light> lights;
-  lights.push_back(Light(Vec3(-20, 20, -20), 2.0));
-  lights.push_back(Light(Vec3(30, 50, 20), 1.5));
-  lights.push_back(Light(Vec3(30, 20, -30), 1.5));
+  Sphere whiteSphere(Vec3(-2.5, -2, 12), 2, Colour(0.4, 0.4, 0.4), 0.6, 0.3, 50, 0.1);
+  Sphere blueSphere(Vec3(2.5, -2, 19), 4, Colour(0.0, 0.0, 0.25), 0.9, 0.1, 10, 0.0);
+  Sphere mirrorSphere(Vec3(-1, 3, 22), 4, Colour(1.0, 1.0, 1.0), 0.0, 1.0, 1000, 0.9);
+  scene.addSpheres(std::vector<Sphere> { whiteSphere, blueSphere, mirrorSphere });
 
-  render(spheres, lights);
+  scene.addLight(Light(Vec3(-20, 20, -20), 2.0));
+  scene.addLight(Light(Vec3(30, 50, 20), 1.5));
+  scene.addLight(Light(Vec3(30, 20, -30), 1.5));
+
+  render(scene);
 
   return 0;
 }
