@@ -1,12 +1,10 @@
 #include "Scene.h"
 
-Scene::Scene(const Vec3 camera, const std::vector<Light>& lights, const std::vector<Sphere>& spheres) : camera(camera), lights(lights), spheres(spheres) {}
+Scene::Scene(const Camera camera, const std::vector<Light>& lights, const std::vector<Sphere>& spheres) : camera(camera), lights(lights), spheres(spheres) {}
 
-Scene::Scene(const Vec3 camera) : Scene(camera, std::vector<Light>(), std::vector<Sphere>()) {}
+Scene::Scene(const Camera camera) : Scene(camera, std::vector<Light>(), std::vector<Sphere>()) {}
 
-Scene::Scene() : Scene(Vec3()) {}
-
-Vec3 Scene::getCamera() const { return camera; }
+Camera Scene::getCamera() const { return camera; }
 
 void Scene::addLight(const Light light) {
   lights.push_back(light);

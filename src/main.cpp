@@ -1,12 +1,13 @@
-#include "Vec3.h"
-#include "Colour.h"
-#include "Sphere.h"
-#include "Light.h"
-#include "Scene.h"
 #include <vector>
 #include <fstream>
 #include <cmath>
 #include <limits>
+#include "Camera.h"
+#include "Vec3.h"
+#include "Scene.h"
+#include "Sphere.h"
+#include "Colour.h"
+#include "Light.h"
 
 // Returns true if the ray with the given origin and direction intersects with the given sphere and updates distance to distance from origin to first point of intersection, if any
 bool raySphereIntersection(const Vec3& origin, const Vec3& direction, float& distance, const Sphere& sphere) {
@@ -104,12 +105,14 @@ Colour castRay(const Vec3& origin, const Vec3& direction, const std::vector<Sphe
 
 // Cast a ray from the camera in the direction of each pixel to get the colour of each pixel and output the rendered image
 void render(const Scene& scene) {
+  Camera camera = scene.getCamera();
+
   // Dimensions of output image
-  const int width = 800;
-  const int height = 600;
+  int width = camera.getWidth();
+  int height = camera.getHeight();
 
   // Field of view of camera
-  const float fov = 1;
+  float fov = camera.getFieldOfView();
   
   // Create framebuffer
   std::vector<Colour> framebuffer(width * height);
@@ -119,8 +122,8 @@ void render(const Scene& scene) {
       float x = (2 * (j + 0.5) / width - 1) * tan(fov / 2) * width / height;
       float y = - (2 * (i + 0.5) / height - 1) * tan(fov / 2);
       // Direction to cast ray
-      Vec3 direction = Vec3(x, y, 1).normalize();
-      framebuffer[j + i * width] = castRay(scene.getCamera(), direction, scene.getSpheres(), scene.getLights());
+      Vec3 direction = Vec3(x, y, camera.getZoom()).normalize();
+      framebuffer[j + i * width] = castRay(camera.getPosition(), direction, scene.getSpheres(), scene.getLights());
     }
   }
 
@@ -138,7 +141,9 @@ void render(const Scene& scene) {
 }
 
 int main() {
-  Scene scene;
+  Camera camera(Vec3(0, 0, 0), 1, 800, 600, 1);
+
+  Scene scene(camera);
 
   Sphere whiteSphere(Vec3(-2.5, -2, 12), 2, Colour(0.4, 0.4, 0.4), 0.6, 0.3, 50, 0.1);
   Sphere blueSphere(Vec3(2.5, -2, 19), 4, Colour(0.0, 0.0, 0.25), 0.9, 0.1, 10, 0.0);

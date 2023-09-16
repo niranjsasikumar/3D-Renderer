@@ -1,22 +1,21 @@
 #ifndef SCENE_H
 #define SCENE_H
 #include <vector>
-#include "Vec3.h"
+#include "Camera.h"
 #include "Light.h"
 #include "Sphere.h"
 
 class Scene {
   private:
-    Vec3 camera;
+    Camera camera;
     std::vector<Light> lights;
     std::vector<Sphere> spheres;
 
   public:
-    Scene();
-    Scene(const Vec3 camera);
-    Scene(const Vec3 camera, const std::vector<Light>& lights, const std::vector<Sphere>& spheres);
+    Scene(const Camera camera);
+    Scene(const Camera camera, const std::vector<Light>& lights, const std::vector<Sphere>& spheres);
 
-    Vec3 getCamera() const;
+    Camera getCamera() const;
     void addLight(const Light light);
     void addLights(const std::vector<Light>& newLights);
     std::vector<Light> getLights() const;
