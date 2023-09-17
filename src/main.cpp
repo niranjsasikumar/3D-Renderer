@@ -63,19 +63,19 @@ Vec3 reflect(const Vec3& direction, const Vec3& surface_normal) {
 }
 
 // Return the colour of the point of intersection of a ray cast from origin with a direction
-Colour castRay(const Vec3& origin, const Vec3& direction, const std::vector<Sphere>& spheres, const std::vector<Light>& lights, const size_t depth = 0) {
+Colour castRay(const Vec3& origin, const Vec3& direction, const Colour& backgroundColour, const std::vector<Sphere>& spheres, const std::vector<Light>& lights, const size_t depth = 0) {
   Sphere sphere;
   Vec3 point; // Point of intersection
   Vec3 surface_normal; // Surface normal at point of intersection
 
   // Return the background colour if the ray does not intersect anything or if the ray is reflected too many times
   if (depth > 5 || !sceneIntersection(origin, direction, spheres, point, surface_normal, sphere))
-    return Colour(0.526, 0.804, 0.918);
+    return backgroundColour;
   
   Vec3 reflect_direction = reflect(direction, surface_normal).normalize();
   // Origin of reflection, slightly offset to prevent intersection with object itself
   Vec3 reflect_origin = reflect_direction * surface_normal < 0 ? point - surface_normal * 1e-3 : point + surface_normal * 1e-3;
-  Colour reflect_colour = castRay(reflect_origin, reflect_direction, spheres, lights, depth + 1);
+  Colour reflect_colour = castRay(reflect_origin, reflect_direction, backgroundColour, spheres, lights, depth + 1);
 
   float diffuse_light_intensity = 0.0f, specular_light_intensity = 0.0f;
 
@@ -123,7 +123,7 @@ void render(const Scene& scene) {
       float y = - (2 * (i + 0.5) / height - 1) * tan(fov / 2);
       // Direction to cast ray
       Vec3 direction = Vec3(x, y, camera.getZoom()).normalize();
-      framebuffer[j + i * width] = castRay(camera.getPosition(), direction, scene.getSpheres(), scene.getLights());
+      framebuffer[j + i * width] = castRay(camera.getPosition(), direction, scene.getBackgroundColour(), scene.getSpheres(), scene.getLights());
     }
   }
 
@@ -141,9 +141,10 @@ void render(const Scene& scene) {
 }
 
 int main() {
+  Colour backgroundColour(0.526, 0.804, 0.918);
   Camera camera(Vec3(0, 0, 0), 1, 800, 600, 1);
 
-  Scene scene(camera);
+  Scene scene(backgroundColour, camera);
 
   Sphere whiteSphere(Vec3(-2.5, -2, 12), 2, Colour(0.4, 0.4, 0.4), 0.6, 0.3, 50, 0.1);
   Sphere blueSphere(Vec3(2.5, -2, 19), 4, Colour(0.0, 0.0, 0.25), 0.9, 0.1, 10, 0.0);
