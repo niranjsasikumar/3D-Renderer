@@ -6,7 +6,7 @@ void Colour::validateRange(const float& value) const {
     throw std::invalid_argument("Invalid RGB value");
 }
 
-Colour::Colour() : r(0.3f), g(0.3f), b(0.3f) {}
+Colour::Colour() {}
 
 Colour::Colour(float red, float green, float blue) {
   validateRange(red);

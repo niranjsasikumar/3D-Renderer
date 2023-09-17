@@ -14,11 +14,24 @@ class Sphere {
     float specular_exponent;
     float reflectivity;
 
-    void validateRange(const float& value, const float& min, const float& max, const std::string& name) const;
+    void validateRange(
+      const float& value,
+      const float& min,
+      const float& max,
+      const std::string& name
+    ) const;
 
   public:
     Sphere();
-    Sphere(Vec3 center, float radius, Colour colour, float drc, float src, float specular_exponent, float reflectivity);
+    Sphere(
+      Vec3 center,
+      float radius,
+      Colour colour,
+      float drc,
+      float src,
+      float specular_exponent,
+      float reflectivity
+    );
 
     Vec3 getCenter() const;
     float getRadius() const;

@@ -1,14 +1,27 @@
 #include "Sphere.h"
 #include <stdexcept>
 
-void Sphere::validateRange(const float& value, const float& min, const float& max, const std::string& name) const {
+void Sphere::validateRange(
+  const float& value,
+  const float& min,
+  const float& max,
+  const std::string& name
+) const {
   if (value < min || value > max)
     throw std::invalid_argument("Invalid " + name + " value");
 }
 
-Sphere::Sphere() : center(Vec3()), radius(1.0f), colour(Colour()), drc(0.9f), src(0.1f), specular_exponent(10.0f), reflectivity(0.0f) {}
+Sphere::Sphere() {}
 
-Sphere::Sphere(Vec3 center, float radius, Colour colour, float drc, float src, float specular_exponent, float reflectivity) : center(center) {
+Sphere::Sphere(
+  Vec3 center,
+  float radius,
+  Colour colour,
+  float drc,
+  float src,
+  float specular_exponent,
+  float reflectivity
+) : center(center), colour(colour) {
   if (radius <= 0.0f)
     throw std::invalid_argument("Invalid radius value");
   
@@ -18,7 +31,6 @@ Sphere::Sphere(Vec3 center, float radius, Colour colour, float drc, float src, f
   validateRange(reflectivity, 0.0f, 1.0f, "reflectivity");
   
   this->radius = radius;
-  this->colour = colour;
   this->drc = drc;
   this->src = src;
   this->specular_exponent = specular_exponent;

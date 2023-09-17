@@ -8,7 +8,6 @@ class Light {
     float intensity;
 
   public:
-    Light();
     Light(Vec3 position, float intensity);
 
     Vec3 getPosition() const;
