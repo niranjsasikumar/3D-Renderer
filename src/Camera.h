@@ -5,24 +5,14 @@
 class Camera {
   private:
     Vec3 position;
-    float fieldOfView;
-    int width;
-    int height;
+    float field_of_view;
     float zoom;
 
   public:
-    Camera(
-      const Vec3& position,
-      const float& fieldOfView,
-      const int& width,
-      const int& height,
-      const float& zoom
-    );
+    Camera(const Vec3& position, const float& field_of_view, const float& zoom);
 
     Vec3 getPosition() const;
     float getFieldOfView() const;
-    int getWidth() const;
-    int getHeight() const;
     float getZoom() const;
 };
 

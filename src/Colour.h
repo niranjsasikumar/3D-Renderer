@@ -5,8 +5,6 @@
 class Colour {
   private:
     float r, g, b;
-
-    void validateRange(const float& value) const;
   
   public:
     Colour();

@@ -1,12 +1,12 @@
 #include "Sphere.h"
 #include <stdexcept>
 
-void Sphere::validateRange(
+void validateRange(
   const float& value,
   const float& min,
   const float& max,
   const std::string& name
-) const {
+) {
   if (value < min || value > max)
     throw std::invalid_argument("Invalid " + name + " value");
 }

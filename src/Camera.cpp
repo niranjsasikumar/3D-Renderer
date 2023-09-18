@@ -2,22 +2,12 @@
 
 Camera::Camera(
   const Vec3& position,
-  const float& fieldOfView,
-  const int& width,
-  const int& height,
+  const float& field_of_view,
   const float& zoom
-) : position(position),
-fieldOfView(fieldOfView),
-width(width),
-height(height),
-zoom(zoom) {}
+) : position(position), field_of_view(field_of_view), zoom(zoom) {}
 
 Vec3 Camera::getPosition() const { return position; }
 
-float Camera::getFieldOfView() const { return fieldOfView; }
-
-int Camera::getWidth() const { return width; }
-
-int Camera::getHeight() const { return height; }
+float Camera::getFieldOfView() const { return field_of_view; }
 
 float Camera::getZoom() const { return zoom; }

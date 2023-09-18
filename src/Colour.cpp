@@ -1,7 +1,7 @@
 #include "Colour.h"
 #include <stdexcept>
 
-void Colour::validateRange(const float& value) const {
+void validateRange(const float& value) {
   if (value < 0.0f || value > 1.0f)
     throw std::invalid_argument("Invalid RGB value");
 }

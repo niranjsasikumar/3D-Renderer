@@ -14,13 +14,6 @@ class Sphere {
     float specular_exponent;
     float reflectivity;
 
-    void validateRange(
-      const float& value,
-      const float& min,
-      const float& max,
-      const std::string& name
-    ) const;
-
   public:
     Sphere();
     Sphere(
