@@ -4,6 +4,9 @@
 #include <tuple>
 #include "Colour.hpp"
 #include "Scene.hpp"
+#include "Vec3.hpp"
+#include "Sphere.hpp"
+#include "Light.hpp"
 
 class Renderer {
   public:
