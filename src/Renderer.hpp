@@ -2,8 +2,8 @@
 #define RENDERER_H
 #include <vector>
 #include <tuple>
-#include "Colour.h"
-#include "Scene.h"
+#include "Colour.hpp"
+#include "Scene.hpp"
 
 class Renderer {
   public:

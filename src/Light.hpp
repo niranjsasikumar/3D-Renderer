@@ -1,6 +1,6 @@
 #ifndef LIGHT_H
 #define LIGHT_H
-#include "Vec3.h"
+#include "Vec3.hpp"
 
 class Light {
   private:

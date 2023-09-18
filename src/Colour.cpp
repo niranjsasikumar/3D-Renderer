@@ -1,4 +1,4 @@
-#include "Colour.h"
+#include "Colour.hpp"
 #include <stdexcept>
 
 void validateRange(const float& value) {

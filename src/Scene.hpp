@@ -1,10 +1,10 @@
 #ifndef SCENE_H
 #define SCENE_H
 #include <vector>
-#include "Colour.h"
-#include "Camera.h"
-#include "Light.h"
-#include "Sphere.h"
+#include "Colour.hpp"
+#include "Camera.hpp"
+#include "Light.hpp"
+#include "Sphere.hpp"
 
 class Scene {
   private:

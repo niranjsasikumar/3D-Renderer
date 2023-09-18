@@ -1,6 +1,6 @@
 #ifndef CAMERA_H
 #define CAMERA_H
-#include "Vec3.h"
+#include "Vec3.hpp"
 
 class Camera {
   private:

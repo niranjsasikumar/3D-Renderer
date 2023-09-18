@@ -1,14 +1,14 @@
-#include "Renderer.h"
+#include "Renderer.hpp"
 #include <vector>
 #include <tuple>
 #include <cmath>
 #include <limits>
-#include "Colour.h"
-#include "Scene.h"
-#include "Camera.h"
-#include "Vec3.h"
-#include "Sphere.h"
-#include "Light.h"
+#include "Colour.hpp"
+#include "Scene.hpp"
+#include "Camera.hpp"
+#include "Vec3.hpp"
+#include "Sphere.hpp"
+#include "Light.hpp"
 
 Renderer::Renderer(
   const float& render_distance,

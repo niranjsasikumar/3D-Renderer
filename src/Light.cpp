@@ -1,4 +1,4 @@
-#include "Light.h"
+#include "Light.hpp"
 #include <stdexcept>
 
 Light::Light(Vec3 position, float intensity) : position(position) {

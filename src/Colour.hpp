@@ -1,6 +1,6 @@
 #ifndef COLOUR_H
 #define COLOUR_H
-#include "Vec3.h"
+#include "Vec3.hpp"
 
 class Colour {
   private:

@@ -1,7 +1,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include "Renderer.h"
+#include "Renderer.hpp"
 
 void saveFramebufferToFile(
   const std::vector<Colour>& framebuffer,

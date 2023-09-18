@@ -1,7 +1,7 @@
 #ifndef SPHERE_H
 #define SPHERE_H
-#include "Vec3.h"
-#include "Colour.h"
+#include "Vec3.hpp"
+#include "Colour.hpp"
 #include <string>
 
 class Sphere {
