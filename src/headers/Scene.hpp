@@ -9,6 +9,7 @@
 class Scene {
   private:
     Colour background_colour;
+    float ambient_light;
     Camera camera;
     std::vector<Light> lights;
     std::vector<Sphere> spheres;
@@ -16,13 +17,19 @@ class Scene {
   public:
     Scene(
       const Colour& background_colour,
+      const float& ambient_light,
       const Camera& camera,
       const std::vector<Light>& lights,
       const std::vector<Sphere>& spheres
     );
-    Scene(const Colour& background_colour, const Camera& camera);
+    Scene(
+      const Colour& background_colour,
+      const float& ambient_light,
+      const Camera& camera
+    );
 
     Colour getBackgroundColour() const;
+    float getAmbientLight() const;
     Camera getCamera() const;
     void addLight(const Light light);
     void addLights(const std::vector<Light>& new_lights);

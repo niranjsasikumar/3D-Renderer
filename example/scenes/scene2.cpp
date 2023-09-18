@@ -3,7 +3,7 @@
 Scene getScene2() {
   Colour background_colour(0.8, 0.8, 0.8);
   Camera camera(Vec3(0, 0, 0), 1, 1);
-  Scene scene(background_colour, camera);
+  Scene scene(background_colour, 0.2, camera);
 
   Sphere o_atom(Vec3(0, 0, 7), 2, Colour(0.5, 0, 0), 0.9, 0.1, 10, 0);
   Sphere h_atom1(

@@ -26,6 +26,7 @@ class Renderer {
       const Vec3& origin,
       const Vec3& direction,
       const Colour& background_colour,
+      const float& ambient_light,
       const std::vector<Sphere>& spheres,
       const std::vector<Light>& lights,
       const size_t depth
@@ -34,6 +35,7 @@ class Renderer {
       const Vec3& direction,
       const Vec3& intersection_point,
       const Vec3& surface_normal,
+      const float& ambient_light,
       const std::vector<Light>& lights,
       const std::vector<Sphere>& spheres,
       const Sphere& sphere

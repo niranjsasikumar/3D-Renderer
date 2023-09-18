@@ -42,6 +42,7 @@ std::vector<Colour> Renderer::render(const Scene& scene) {
         camera.getPosition(),
         direction,
         scene.getBackgroundColour(),
+        scene.getAmbientLight(),
         scene.getSpheres(),
         scene.getLights(),
         0
@@ -63,6 +64,7 @@ Colour Renderer::castRay(
   const Vec3& origin,
   const Vec3& direction,
   const Colour& background_colour,
+  const float& ambient_light,
   const std::vector<Sphere>& spheres,
   const std::vector<Light>& lights,
   const size_t depth
@@ -89,6 +91,7 @@ Colour Renderer::castRay(
     reflect_origin,
     reflect_direction,
     background_colour,
+    ambient_light,
     spheres,
     lights,
     depth + 1
@@ -99,7 +102,7 @@ Colour Renderer::castRay(
   std::tie(
     diffuse_light_intensity, specular_light_intensity
   ) = getLightIntensities(
-    direction, point, surface_normal, lights, spheres, sphere
+    direction, point, surface_normal, ambient_light, lights, spheres, sphere
   );
 
   Vec3 diffuse_colour = sphere.getColour()
@@ -120,11 +123,13 @@ std::tuple<float,float> Renderer::getLightIntensities(
   const Vec3& direction,
   const Vec3& intersection_point,
   const Vec3& surface_normal,
+  const float& ambient_light,
   const std::vector<Light>& lights,
   const std::vector<Sphere>& spheres,
   const Sphere& sphere
 ) {
-  float diffuse_light_intensity = 0.0f, specular_light_intensity = 0.0f;
+  float diffuse_light_intensity = ambient_light;
+  float specular_light_intensity = ambient_light;
 
   for (size_t i = 0; i < lights.size(); i++) {
     Vec3 light_to_intersection = lights[i].getPosition() - intersection_point;

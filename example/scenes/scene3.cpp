@@ -3,7 +3,7 @@
 Scene getScene3() {
   Colour background_colour(0.529, 0.808, 0.922);
   Camera camera(Vec3(0, 0, 0), 1, 1);
-  Scene scene(background_colour, camera);
+  Scene scene(background_colour, 0, camera);
 
   Sphere white_sphere(
     Vec3(-2.5, -2, 12), 2, Colour(0.4, 0.4, 0.4), 0.6, 0.3, 50, 0.1
