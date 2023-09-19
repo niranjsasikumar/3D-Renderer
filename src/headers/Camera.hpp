@@ -9,6 +9,7 @@ class Camera {
     float zoom;
 
   public:
+    Camera();
     Camera(const Vec3& position, const float& field_of_view, const float& zoom);
 
     Vec3 getPosition() const;

@@ -1,5 +1,7 @@
 #include "Camera.hpp"
 
+Camera::Camera() {}
+
 Camera::Camera(
   const Vec3& position,
   const float& field_of_view,
