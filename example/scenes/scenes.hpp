@@ -1,9 +1,18 @@
 #ifndef SCENES_H
 #define SCENES_H
-#include "Scene.hpp"
+#include <string>
+#include <map>
+#include "scene1.hpp"
+#include "scene2.hpp"
+#include "scene3.hpp"
 
-extern Scene getScene1();
-extern Scene getScene2(); // H2O molecule
-extern Scene getScene3();
+Scene getScene(const std::string& name) {
+  std::map<std::string, Scene> scenes;
+  scenes.insert(std::pair<std::string, Scene>("scene1", getScene1()));
+  scenes.insert(std::pair<std::string, Scene>("scene2", getScene2()));
+  scenes.insert(std::pair<std::string, Scene>("scene3", getScene3()));
+
+  return scenes.find(name)->second;
+}
 
 #endif

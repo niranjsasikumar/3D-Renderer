@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <iostream>
 #include "scenes.hpp"
 #include "Renderer.hpp"
 
@@ -25,15 +26,26 @@ void saveFramebufferToFile(
   out_image.close();
 }
 
-int main() {
+int main(int argc, char* argv[]) {
   int output_width = 800;
   int output_height = 600;
   Renderer renderer(1000, output_width, output_height);
 
-  Scene scene = getScene1();
+  Scene scene;
+  try {
+    scene = getScene(argc > 1 ? argv[1] : "scene1");
+  } catch (...) {
+    std::cout << "Invalid scene name";
+    return -1;
+  }
+
   std::vector<Colour> framebuffer = renderer.render(scene);
+  std::string output_directory = argc > 2 ? argv[2] : ".";
   saveFramebufferToFile(
-    framebuffer, "../out_image.ppm", output_width, output_height
+    framebuffer,
+    output_directory + "/out_image.ppm",
+    output_width,
+    output_height
   );
 
   return 0;

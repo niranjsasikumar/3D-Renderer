@@ -1,4 +1,4 @@
-#include "scenes.hpp"
+#include "Scene.hpp"
 
 Scene getScene2() {
   Colour background_colour(0.8, 0.8, 0.8);
