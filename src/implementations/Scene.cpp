@@ -1,5 +1,7 @@
 #include "Scene.hpp"
 
+Scene::Scene() {}
+
 Scene::Scene(
   const Colour& background_colour,
   const float& ambient_light,

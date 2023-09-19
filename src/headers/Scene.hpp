@@ -15,6 +15,7 @@ class Scene {
     std::vector<Sphere> spheres;
 
   public:
+    Scene();
     Scene(
       const Colour& background_colour,
       const float& ambient_light,
