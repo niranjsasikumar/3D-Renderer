@@ -259,6 +259,6 @@ bool Renderer::sceneIntersection(
     }
   }
 
-  // Only render spheres that are within 1000 units of the camera
+  // Only render spheres that are within the render distance
   return sphere_distance < render_distance;
 }

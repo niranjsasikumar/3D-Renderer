@@ -32,8 +32,9 @@ int main(int argc, char* argv[]) {
   Renderer renderer(1000, output_width, output_height);
 
   Scene scene;
+  std::string scene_name = argc > 1 ? argv[1] : "scene1";
   try {
-    scene = getScene(argc > 1 ? argv[1] : "scene1");
+    scene = getScene(scene_name);
   } catch (...) {
     std::cout << "Invalid scene name";
     return -1;
@@ -41,9 +42,10 @@ int main(int argc, char* argv[]) {
 
   std::vector<Colour> framebuffer = renderer.render(scene);
   std::string output_directory = argc > 2 ? argv[2] : ".";
+  std::string output_file_name = argc > 3 ? argv[3] : scene_name;
   saveFramebufferToFile(
     framebuffer,
-    output_directory + "/out_image.ppm",
+    output_directory + "/" + output_file_name + ".ppm",
     output_width,
     output_height
   );
