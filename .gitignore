@@ -35,4 +35,7 @@
 .vscode/
 
 # Output files
+*.pbm
+*.pgm
 *.ppm
+*.pnm
